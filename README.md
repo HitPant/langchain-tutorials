@@ -26,7 +26,7 @@ Built for engineers who want working references — not theory dumps.
 |:-:|----------|-------------------|:------:|
 | 01 | [**LangChain Basics**](./01-langchain-basics/) | Prompts, LLM wrappers, chains, batch & streaming | ✅ |
 | 02 | [**LCEL Deep Dive**](./02-lcel_deep_dive/) | RunnableParallel, Lambda, Branch, Fallbacks | ✅ |
-| 03 | **Output Parsers** | JSON, Pydantic, Enum, auto-fixing parsers | 🔜 |
+| 03 | **Output Parsers** | JSON, Pydantic, Enum, auto-fixing parsers | ✅ |
 | 04 | **Document Loaders** | PDF, CSV, Web, YouTube, GitHub loaders | 🔜 |
 | 05 | **Text Splitters** | Recursive, Token, Semantic chunking | 🔜 |
 | 06 | **RAG with FAISS** | Embeddings, vector store, retrieval chain | 🔜 |
