@@ -39,41 +39,15 @@ Built for engineers who want working references — not theory dumps.
 
 ## Learning Path
 
-```mermaid
-flowchart TD
-    subgraph Foundations
-        A["01 · Basics"] --> B["02 · LCEL"] --> C["03 · Output Parsers"]
-    end
-
-    subgraph Data_Pipeline["Data Pipeline"]
-        D["04 · Doc Loaders"] --> E["05 · Text Splitters"]
-    end
-
-    subgraph RAG
-        F["06 · RAG + FAISS"] --> G["07 · RAG + Chroma"]
-    end
-
-    subgraph Advanced
-        H["08 · Memory"] --> I["09 · Agents"] --> J["10 · Callbacks"]
-    end
-
-    C --> D
-    E --> F
-    G --> H
-
-    style A fill:#1e1e2e,stroke:#00d4aa,color:#cdd6f4
-    style B fill:#1e1e2e,stroke:#00d4aa,color:#cdd6f4
-    style C fill:#1e1e2e,stroke:#00d4aa,color:#cdd6f4
-    style D fill:#1e1e2e,stroke:#3b82f6,color:#cdd6f4
-    style E fill:#1e1e2e,stroke:#3b82f6,color:#cdd6f4
-    style F fill:#1e1e2e,stroke:#f59e0b,color:#cdd6f4
-    style G fill:#1e1e2e,stroke:#f59e0b,color:#cdd6f4
-    style H fill:#1e1e2e,stroke:#ef4444,color:#cdd6f4
-    style I fill:#1e1e2e,stroke:#ef4444,color:#cdd6f4
-    style J fill:#1e1e2e,stroke:#06b6d4,color:#cdd6f4
+```
+Foundations          Data Pipeline        RAG                  Advanced
+─────────────       ──────────────       ──────────────       ──────────────
+01 · Basics     →   04 · Doc Loaders →   06 · RAG FAISS  →   08 · Memory
+02 · LCEL       →   05 · Splitters   →   07 · RAG Chroma →   09 · Agents
+03 · Parsers                                                  10 · Callbacks
 ```
 
-Tutorials are grouped by theme but self-contained — jump to any topic that's relevant to you.
+Tutorials are grouped by theme but self-contained — jump to any topic.
 
 ---
 
