@@ -42,7 +42,7 @@ Built for engineers who want working references — not theory dumps.
 ```mermaid
 flowchart TD
     subgraph Foundations
-        A["01 · Basics"] -> B["02 · LCEL"] --> C["03 · Output Parsers"]
+        A["01 · Basics"] --> B["02 · LCEL"] --> C["03 · Output Parsers"]
     end
 
     subgraph Data_Pipeline["Data Pipeline"]
