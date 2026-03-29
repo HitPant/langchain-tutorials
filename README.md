@@ -44,7 +44,7 @@ Foundations          Data Pipeline        RAG                  Advanced
 ─────────────       ──────────────       ──────────────       ──────────────
 01 · Basics     →   04 · Doc Loaders →   06 · RAG FAISS  →   08 · Memory
 02 · LCEL       →   05 · Splitters   →   07 · RAG Chroma →   09 · Agents
-03 · Parsers                                                  10 · Callbacks
+03 · Parsers                                                 10 · Callbacks
 ```
 
 Tutorials are grouped by theme but self-contained — jump to any topic.
