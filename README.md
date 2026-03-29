@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/header.svg" alt="LangChain Tutorials" width="100%"/>
+  <img src="assets/header.png" alt="LangChain Tutorials" width="100%"/>
 </p>
 
 <p align="center">
@@ -45,7 +45,7 @@ flowchart TD
         A["01 · Basics"] --> B["02 · LCEL"] --> C["03 · Output Parsers"]
     end
 
-    subgraph Data Pipeline
+    subgraph Data_Pipeline["Data Pipeline"]
         D["04 · Doc Loaders"] --> E["05 · Text Splitters"]
     end
 
@@ -57,7 +57,9 @@ flowchart TD
         H["08 · Memory"] --> I["09 · Agents"] --> J["10 · Callbacks"]
     end
 
-    Foundations --> Data Pipeline --> RAG --> Advanced
+    C --> D
+    E --> F
+    G --> H
 
     style A fill:#1e1e2e,stroke:#00d4aa,color:#cdd6f4
     style B fill:#1e1e2e,stroke:#00d4aa,color:#cdd6f4
