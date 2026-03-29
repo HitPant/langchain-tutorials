@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="50%" style="stop-color:#16213e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4aa"/>
+      <stop offset="100%" style="stop-color:#7c3aed"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="900" height="200" rx="12" fill="url(#bg)"/>
+  
+  <!-- Accent line at top -->
+  <rect x="0" y="0" width="900" height="3" rx="1.5" fill="url(#accent)"/>
+  
+  <!-- Chain link decorations -->
+  <g opacity="0.08" fill="white">
+    <circle cx="60" cy="100" r="35" stroke="white" stroke-width="2" fill="none"/>
+    <circle cx="110" cy="100" r="35" stroke="white" stroke-width="2" fill="none"/>
+    <circle cx="790" cy="100" r="35" stroke="white" stroke-width="2" fill="none"/>
+    <circle cx="840" cy="100" r="35" stroke="white" stroke-width="2" fill="none"/>
+  </g>
+  
+  <!-- LangChain parrot emoji substitute: chain icon -->
+  <g transform="translate(200, 55)">
+    <!-- Chain links icon -->
+    <rect x="0" y="20" width="30" height="14" rx="7" fill="none" stroke="#00d4aa" stroke-width="2.5"/>
+    <rect x="18" y="20" width="30" height="14" rx="7" fill="none" stroke="#00d4aa" stroke-width="2.5"/>
+  </g>
+  
+  <!-- Main title -->
+  <text x="260" y="80" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="36" font-weight="700" fill="white" letter-spacing="-0.5">LangChain Tutorials</text>
+  
+  <!-- Subtitle -->
+  <text x="200" y="120" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="16" fill="#94a3b8" letter-spacing="0.3">A practical, code-first guide — from prompt templates to production-ready agents</text>
+  
+  <!-- Tags -->
+  <g transform="translate(200, 145)">
+    <rect x="0" y="0" width="70" height="24" rx="12" fill="#00d4aa" opacity="0.15"/>
+    <text x="35" y="16" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#00d4aa" text-anchor="middle" font-weight="600">Chains</text>
+    
+    <rect x="80" y="0" width="55" height="24" rx="12" fill="#7c3aed" opacity="0.15"/>
+    <text x="107" y="16" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#a78bfa" text-anchor="middle" font-weight="600">RAG</text>
+    
+    <rect x="145" y="0" width="70" height="24" rx="12" fill="#3b82f6" opacity="0.15"/>
+    <text x="180" y="16" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#60a5fa" text-anchor="middle" font-weight="600">Agents</text>
+    
+    <rect x="225" y="0" width="75" height="24" rx="12" fill="#f59e0b" opacity="0.15"/>
+    <text x="262" y="16" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#fbbf24" text-anchor="middle" font-weight="600">Memory</text>
+    
+    <rect x="310" y="0" width="70" height="24" rx="12" fill="#ef4444" opacity="0.15"/>
+    <text x="345" y="16" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#f87171" text-anchor="middle" font-weight="600">LCEL</text>
+    
+    <rect x="390" y="0" width="75" height="24" rx="12" fill="#06b6d4" opacity="0.15"/>
+    <text x="427" y="16" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#22d3ee" text-anchor="middle" font-weight="600">Tracing</text>
+  </g>
+</svg>

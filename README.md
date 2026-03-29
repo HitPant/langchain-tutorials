@@ -22,18 +22,18 @@ Built for engineers who want working references — not theory dumps.
 
 ## Tutorials
 
-| # | Tutorial | What You'll Build | Notebook |
-|:-:|----------|-------------------|:--------:|
-| 01 | [**LangChain Basics**](./01-langchain-basics/) | Prompts, LLM wrappers, chains, batch & streaming | [→](./01-langchain-basics/langchain_basics.ipynb) |
-| 02 | [**LCEL Deep Dive**](./02-lcel-deep-dive/) | RunnableParallel, Lambda, Branch, Fallbacks | [→](./02-lcel-deep-dive/lcel_deep_dive.ipynb) |
-| 03 | [**Output Parsers**](./03-output-parsers/) | JSON, Pydantic, Enum, auto-fixing parsers | [→](./03-output-parsers/output_parsers.ipynb) |
-| 04 | [**Document Loaders**](./04-document-loaders/) | PDF, CSV, Web, YouTube, GitHub loaders | [→](./04-document-loaders/document_loaders.ipynb) |
-| 05 | [**Text Splitters**](./05-text-splitters/) | Recursive, Token, Semantic chunking | [→](./05-text-splitters/text_splitters.ipynb) |
-| 06 | [**RAG with FAISS**](./06-rag-faiss/) | Embeddings, vector store, retrieval chain | [→](./06-rag-faiss/rag_faiss.ipynb) |
-| 07 | [**RAG with ChromaDB**](./07-rag-chroma/) | Persistent store, metadata filtering, MMR | [→](./07-rag-chroma/rag_chroma.ipynb) |
-| 08 | [**Conversational Memory**](./08-conversational-memory/) | Buffer, Summary, Window, Entity memory | [→](./08-conversational-memory/conversational_memory.ipynb) |
-| 09 | [**Agents & Custom Tools**](./09-agents-tools/) | ReAct agent, custom tools, tool routing | [→](./09-agents-tools/agents_tools.ipynb) |
-| 10 | [**Callbacks & Tracing**](./10-callbacks-tracing/) | Custom handlers, LangSmith, cost tracking | [→](./10-callbacks-tracing/callbacks_tracing.ipynb) |
+| # | Tutorial | What You'll Build | Status |
+|:-:|----------|-------------------|:------:|
+| 01 | [**LangChain Basics**](./01-langchain-basics/) | Prompts, LLM wrappers, chains, batch & streaming | ✅ |
+| 02 | [**LCEL Deep Dive**](./02-lcel-deep-dive/) | RunnableParallel, Lambda, Branch, Fallbacks | ✅ |
+| 03 | **Output Parsers** | JSON, Pydantic, Enum, auto-fixing parsers | 🔜 |
+| 04 | **Document Loaders** | PDF, CSV, Web, YouTube, GitHub loaders | 🔜 |
+| 05 | **Text Splitters** | Recursive, Token, Semantic chunking | 🔜 |
+| 06 | **RAG with FAISS** | Embeddings, vector store, retrieval chain | 🔜 |
+| 07 | **RAG with ChromaDB** | Persistent store, metadata filtering, MMR | 🔜 |
+| 08 | **Conversational Memory** | Buffer, Summary, Window, Entity memory | 🔜 |
+| 09 | **Agents & Custom Tools** | ReAct agent, custom tools, tool routing | 🔜 |
+| 10 | **Callbacks & Tracing** | Custom handlers, LangSmith, cost tracking | 🔜 |
 
 ---
 
@@ -70,7 +70,7 @@ Tutorials are sequential but self-contained — jump to any topic that's relevan
 ## Quick Start
 
 ```bash
-git clone https://github.com/hitpant/langchain-tutorials.git
+git clone https://github.com/HitPant/langchain-tutorials.git
 cd langchain-tutorials
 pip install langchain langchain-openai langchain-anthropic langchain-community \
             faiss-cpu chromadb tiktoken
@@ -94,5 +94,13 @@ Pick a tutorial folder and open the notebook.
 ---
 
 <p align="center">
-  Built by <a href="https://github.com/hitpant">Hitesh Pant</a> · <a href="https://www.linkedin.com/in/hiteshpant/">LinkedIn</a>
+  Built by <a href="https://github.com/HitPant">Hitesh Pant</a>
+</p>
+
+<p align="center">
+  <a href="https://www.linkedin.com/in/hitesh-pant/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
+  <a href="https://github.com/HitPant"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a>
+  <a href="https://medium.com/@hitpant"><img src="https://img.shields.io/badge/Medium-000000?style=flat-square&logo=medium&logoColor=white" alt="Medium"/></a>
+  <a href="https://x.com/hitpant21"><img src="https://img.shields.io/badge/X-000000?style=flat-square&logo=x&logoColor=white" alt="X"/></a>
+  <a href="https://hitpant.github.io/"><img src="https://img.shields.io/badge/Portfolio-222222?style=flat-square&logo=githubpages&logoColor=white" alt="Portfolio"/></a>
 </p>
