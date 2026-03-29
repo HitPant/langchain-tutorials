@@ -38,10 +38,11 @@ LangChain lets you swap providers with zero downstream changes:
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
 
+# Initialize two different providers — same interface, different models
 gpt    = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 claude = ChatAnthropic(model="claude-sonnet-4-20250514", temperature=0)
 
-# Identical interface — both use .invoke()
+# Both use .invoke() — swap providers without changing downstream code
 gpt.invoke("What is LangChain?")
 claude.invoke("What is LangChain?")
 ```
@@ -57,12 +58,13 @@ Separate prompt engineering from application code:
 ```python
 from langchain_core.prompts import ChatPromptTemplate
 
+# Define a reusable template with variable placeholders {role} and {question}
 prompt = ChatPromptTemplate.from_messages([
     ("system", "You are a {role}. Be concise — 2 sentences max."),
     ("human", "{question}")
 ])
 
-# Reuse with different inputs
+# Reuse the same template with different inputs — no prompt rewriting needed
 prompt.invoke({"role": "ML engineer", "question": "What is RLHF?"})
 ```
 
@@ -71,11 +73,13 @@ prompt.invoke({"role": "ML engineer", "question": "What is RLHF?"})
 ```python
 from langchain_core.prompts import FewShotChatMessagePromptTemplate
 
+# Provide example input→output pairs so the LLM mimics this exact format
 examples = [
     {"input": "What is gradient descent?",
      "output": "CONCEPT: Gradient Descent\nCATEGORY: Optimization\nTLDR: Iteratively adjust params in the direction of steepest loss reduction."},
 ]
 
+# Wraps examples into a prompt the LLM sees before your actual question
 few_shot = FewShotChatMessagePromptTemplate(
     example_prompt=example_prompt, examples=examples
 )
@@ -90,8 +94,10 @@ The `|` operator is LangChain's core abstraction. Connect `prompt → model → 
 ```python
 from langchain_core.output_parsers import StrOutputParser
 
+# Pipe operator chains components: prompt formats → LLM generates → parser extracts string
 chain = prompt | gpt | StrOutputParser()
 
+# .invoke() runs the full pipeline end-to-end with your input dict
 result = chain.invoke({
     "role": "data scientist",
     "question": "XGBoost vs neural networks?"
@@ -121,15 +127,16 @@ flowchart LR
 Chain LLM calls together. Output of step 1 feeds into step 2:
 
 ```python
-# Step 1: Technical explanation
+# Step 1: Generate a technical explanation from the concept
 step1 = explain_prompt | gpt | StrOutputParser()
 
-# Step 2: Simplify for executives
+# Step 2: Take that technical explanation and simplify it for executives
 step2 = simplify_prompt | gpt | StrOutputParser()
 
-# Connect: concept → technical → simplified
+# Connect steps: step1's output becomes step2's input via the "technical_explanation" key
 full_chain = {"technical_explanation": step1} | step2
 
+# One invoke runs both LLM calls in sequence
 result = full_chain.invoke({"concept": "vector embeddings"})
 ```
 
@@ -150,15 +157,15 @@ flowchart LR
 ### ⚡ Batch & Streaming
 
 ```python
-# Batch — process multiple inputs in parallel
+# Batch — process multiple inputs in parallel (one API call per input, run concurrently)
 results = chain.batch([
     {"role": "ML engineer", "question": "What is attention?"},
     {"role": "ML engineer", "question": "What is RLHF?"},
 ])
 
-# Stream — token-by-token output
+# Stream — token-by-token output for real-time UX (chatbot-style)
 for chunk in chain.stream({"role": "poet", "question": "Describe transformers"}):
-    print(chunk, end="", flush=True)
+    print(chunk, end="", flush=True)  # prints each token as it arrives
 ```
 
 ---

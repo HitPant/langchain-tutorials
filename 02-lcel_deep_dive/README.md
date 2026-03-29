@@ -37,7 +37,8 @@ from langchain_core.runnables import RunnablePassthrough
 
 summary_chain = prompt | llm | StrOutputParser()
 
-# Keeps {"topic": "..."} AND adds {"summary": "..."}
+# .assign() keeps the original input dict AND adds a new "summary" key
+# The summary_chain runs on the input, and its result is stored under "summary"
 chain = RunnablePassthrough.assign(
     summary=summary_chain  # run this chain, store result under "summary" key
 )
@@ -70,11 +71,12 @@ flowchart LR
 ```python
 from langchain_core.runnables import RunnableParallel
 
-# All 3 chains receive the SAME input and run AT THE SAME TIME
+# All 3 chains receive the SAME input dict and execute AT THE SAME TIME
+# Each chain's result is stored under its key in the output dict
 analysis = RunnableParallel(
-    pros=pros_prompt | llm | StrOutputParser(),       # chain 1
-    cons=cons_prompt | llm | StrOutputParser(),       # chain 2 (parallel)
-    use_cases=usecase_prompt | llm | StrOutputParser() # chain 3 (parallel)
+    pros=pros_prompt | llm | StrOutputParser(),        # chain 1 — runs in parallel
+    cons=cons_prompt | llm | StrOutputParser(),        # chain 2 — runs in parallel
+    use_cases=usecase_prompt | llm | StrOutputParser()  # chain 3 — runs in parallel
 )
 
 result = analysis.invoke({"technology": "LangChain"})
@@ -112,20 +114,21 @@ flowchart LR
 from langchain_core.runnables import RunnableLambda
 
 def clean_input(data: dict) -> dict:
-    """Runs BEFORE the prompt — cleans raw user input."""
+    """Runs BEFORE the prompt — normalizes raw user input."""
     return {"query": data["query"].strip().lower()}
 
 def format_output(text: str) -> dict:
-    """Runs AFTER the parser — structures the raw LLM output."""
+    """Runs AFTER the parser — adds metadata to the raw LLM output."""
     return {"answer": text, "char_count": len(text)}
 
 # Full pipeline: preprocess → prompt → LLM → parse → postprocess
+# RunnableLambda turns plain functions into chain-compatible Runnables
 chain = (
-    RunnableLambda(clean_input)      # Step 1: your Python function
-    | prompt                          # Step 2: prompt template
-    | llm                             # Step 3: LLM call
-    | StrOutputParser()               # Step 4: extract string
-    | RunnableLambda(format_output)   # Step 5: your Python function
+    RunnableLambda(clean_input)      # Step 1: your Python function (preprocessing)
+    | prompt                          # Step 2: prompt template (formatting)
+    | llm                             # Step 3: LLM call (generation)
+    | StrOutputParser()               # Step 4: extract string from AIMessage
+    | RunnableLambda(format_output)   # Step 5: your Python function (postprocessing)
 )
 ```
 
@@ -156,21 +159,22 @@ flowchart LR
 ```python
 from langchain_core.runnables import RunnableBranch
 
+# Conditions are checked TOP to BOTTOM — first match wins, last entry is the default
 router = RunnableBranch(
-    # (condition, chain_to_run) — checked TOP to BOTTOM, first match wins
-    
-    (lambda x: "code" in x["query"].lower(),    # if coding question →
-     code_prompt | llm | StrOutputParser()),      # use code-specialized chain
-    
-    (lambda x: "solve" in x["query"].lower(),    # elif math question →
-     math_prompt | llm | StrOutputParser()),      # use math-specialized chain
-    
-    general_prompt | llm | StrOutputParser(),     # else → use general chain
+    # (condition_function, chain_to_run)
+
+    (lambda x: "code" in x["query"].lower(),    # if query mentions "code" →
+     code_prompt | llm | StrOutputParser()),      #   route to code-specialized chain
+
+    (lambda x: "solve" in x["query"].lower(),    # elif query mentions "solve" →
+     math_prompt | llm | StrOutputParser()),      #   route to math-specialized chain
+
+    general_prompt | llm | StrOutputParser(),     # else → fallback to general chain
 )
 
-# "Write a Python function..." → routed to code chain (specialized prompt)
-# "Solve 3x + 7 = 22"         → routed to math chain (step-by-step prompt)
-# "What is the capital?"       → routed to general chain (default)
+# "Write a Python function..." → matched "code" → routed to code chain
+# "Solve 3x + 7 = 22"         → matched "solve" → routed to math chain
+# "What is the capital?"       → no match        → routed to general chain
 ```
 
 ```mermaid
@@ -205,10 +209,11 @@ flowchart TD
 primary = ChatOpenAI(model="gpt-4o-mini")
 backup = ChatAnthropic(model="claude-sonnet-4-20250514")
 
-# If GPT fails → Claude answers automatically. User never knows.
+# If GPT fails (timeout, rate limit, etc.) → Claude answers automatically
+# The switch is silent — user never sees the failure
 resilient_llm = primary.with_fallbacks([backup])
 
-# You can stack multiple: primary → backup1 → backup2 → backup3
+# You can stack multiple fallbacks: primary → backup1 → backup2 → backup3
 chain = prompt | resilient_llm | StrOutputParser()
 ```
 
