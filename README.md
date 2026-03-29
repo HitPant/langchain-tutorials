@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="header.svg" alt="LangChain Tutorials" width="100%"/>
+  <img src="assets/header.svg" alt="LangChain Tutorials" width="100%"/>
 </p>
 
 <p align="center">
@@ -40,20 +40,28 @@ Built for engineers who want working references — not theory dumps.
 ## Learning Path
 
 ```mermaid
-flowchart LR
-    A["01\nBasics"] --> B["02\nLCEL"]
-    B --> C["03\nOutput\nParsers"]
-    C --> D["04\nDoc\nLoaders"]
-    D --> E["05\nText\nSplitters"]
-    E --> F["06\nRAG\nFAISS"]
-    F --> G["07\nRAG\nChroma"]
-    G --> H["08\nMemory"]
-    H --> I["09\nAgents"]
-    I --> J["10\nCallbacks"]
+flowchart TD
+    subgraph Foundations
+        A["01 · Basics"] --> B["02 · LCEL"] --> C["03 · Output Parsers"]
+    end
+
+    subgraph Data Pipeline
+        D["04 · Doc Loaders"] --> E["05 · Text Splitters"]
+    end
+
+    subgraph RAG
+        F["06 · RAG + FAISS"] --> G["07 · RAG + Chroma"]
+    end
+
+    subgraph Advanced
+        H["08 · Memory"] --> I["09 · Agents"] --> J["10 · Callbacks"]
+    end
+
+    Foundations --> Data Pipeline --> RAG --> Advanced
 
     style A fill:#1e1e2e,stroke:#00d4aa,color:#cdd6f4
     style B fill:#1e1e2e,stroke:#00d4aa,color:#cdd6f4
-    style C fill:#1e1e2e,stroke:#7c3aed,color:#cdd6f4
+    style C fill:#1e1e2e,stroke:#00d4aa,color:#cdd6f4
     style D fill:#1e1e2e,stroke:#3b82f6,color:#cdd6f4
     style E fill:#1e1e2e,stroke:#3b82f6,color:#cdd6f4
     style F fill:#1e1e2e,stroke:#f59e0b,color:#cdd6f4
@@ -63,7 +71,7 @@ flowchart LR
     style J fill:#1e1e2e,stroke:#06b6d4,color:#cdd6f4
 ```
 
-Tutorials are sequential but self-contained — jump to any topic that's relevant to you.
+Tutorials are grouped by theme but self-contained — jump to any topic that's relevant to you.
 
 ---
 
