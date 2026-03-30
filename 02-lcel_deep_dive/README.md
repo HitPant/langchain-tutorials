@@ -244,7 +244,7 @@ flowchart LR
 <tr>
 <td><b>Passthrough</b></td>
 <td><code>RunnablePassthrough()</code></td>
-<td>Conveyor belt — package stays on it</td>
+<td>Conveyor belt: package stays on it</td>
 <td>Carry original input forward</td>
 </tr>
 <tr>
