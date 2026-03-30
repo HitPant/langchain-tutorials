@@ -77,7 +77,7 @@ flowchart TD
 
 ---
 
-### 📤 StrOutputParser — The Default
+### 📤 StrOutputParser: The Default
 
 **The Problem:** `llm.invoke()` returns an `AIMessage` object, not a plain string. If you try to concatenate it or pass it downstream, you get type errors.
 
@@ -86,21 +86,21 @@ flowchart TD
 ```python
 from langchain_core.output_parsers import StrOutputParser
 
-# Without parser — returns an AIMessage object, not a string
+# Without parser: returns an AIMessage object, not a string
 raw = llm.invoke("What is RLHF?")
-print(type(raw))   # <class 'AIMessage'> — not directly usable as text
+print(type(raw))   # <class 'AIMessage'>: not directly usable as text
 
-# With parser — extracts the .content string automatically
+# With parser: extracts the .content string automatically
 chain = llm | StrOutputParser()
 result = chain.invoke("What is RLHF?")
-print(type(result))  # <class 'str'> — clean, usable text
+print(type(result))  # <class 'str'>: clean, usable text
 ```
 
 **When to use:** Every chain where you want a plain string back. This is the parser you've been using in Tutorials 01–02.
 
 ---
 
-### 📦 JsonOutputParser — Get a Python Dict
+### 📦 JsonOutputParser: Get a Python Dict
 
 **The Problem:** You ask the LLM to return JSON, but `.invoke()` gives you a string that *looks* like JSON — not an actual Python dict. You'd have to manually `json.loads()` it every time.
 
@@ -109,7 +109,7 @@ print(type(result))  # <class 'str'> — clean, usable text
 ```python
 from langchain_core.output_parsers import JsonOutputParser
 
-# Create the parser — it auto-generates instructions telling the LLM "respond in JSON"
+# Create the parser: it auto-generates instructions telling the LLM "respond in JSON"
 parser = JsonOutputParser()
 
 prompt = ChatPromptTemplate.from_messages([
@@ -125,7 +125,7 @@ result = chain.invoke({
     "format_instructions": parser.get_format_instructions()  # injected into the prompt
 })
 
-print(type(result))      # <class 'dict'> — not a string, a real Python dict
+print(type(result))      # <class 'dict'>: not a string, a real Python dict
 print(result["fact_1"])   # access values directly like any dict
 ```
 
@@ -133,7 +133,7 @@ print(result["fact_1"])   # access values directly like any dict
 
 ---
 
-### 🏗️ PydanticOutputParser — Validated Structured Output
+### 🏗️ PydanticOutputParser: Validated Structured Output
 
 **The Problem:** `JsonOutputParser` gives you a dict, but doesn't validate types or enforce required fields. If the LLM returns `"rating": "eight"` instead of `"rating": 8`, your app crashes downstream — not at parse time.
 
@@ -153,7 +153,7 @@ class MovieReview(BaseModel):
     cons: List[str] = Field(description="Negative aspects")
     verdict: str = Field(description="One-line recommendation")
 
-# Step 2: Create the parser — it reads your model's schema automatically
+# Step 2: Create the parser: it reads your model's schema automatically
 parser = PydanticOutputParser(pydantic_object=MovieReview)
 
 # Step 3: Build a prompt that includes {format_instructions}
@@ -163,7 +163,7 @@ prompt = ChatPromptTemplate.from_messages([
     ("human", "Review the movie: {movie}")
 ])
 
-# Step 4: Chain it — prompt → LLM → parser validates + converts → MovieReview object
+# Step 4: Chain it: prompt → LLM → parser validates + converts → MovieReview object
 chain = prompt | llm | parser
 review = chain.invoke({
     "movie": "Inception",
@@ -195,7 +195,7 @@ flowchart LR
 
 ---
 
-### 📋 CommaSeparatedListOutputParser — Quick Lists
+### 📋 CommaSeparatedListOutputParser: Quick Lists
 
 **The Problem:** You just need a simple Python list of strings. Using JSON or Pydantic for `["Django", "Flask", "FastAPI"]` is overkill.
 
@@ -222,20 +222,20 @@ print(type(result))  # <class 'list'>
 print(result)        # ['Django', 'Flask', 'FastAPI', 'Tornado', 'Bottle']
 ```
 
-**When to use:** Simple list extraction — tags, categories, recommendations. Skip it if you need nested or typed data.
+**When to use:** Simple list extraction: tags, categories, recommendations. Skip it if you need nested or typed data.
 
 ---
 
-### 🗂️ StructuredOutputParser — Schema Without Pydantic
+### 🗂️ StructuredOutputParser: Schema Without Pydantic
 
 **The Problem:** You want structured key-value output but don't want to define a full Pydantic model for a one-off query.
 
-**The Solution:** `StructuredOutputParser` lets you define a schema with simple `ResponseSchema` objects — just a name and description per field. Lighter than Pydantic, returns a plain dict.
+**The Solution:** `StructuredOutputParser` lets you define a schema with simple `ResponseSchema` objects, just a name and description per field. Lighter than Pydantic, returns a plain dict.
 
 ```python
 from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 
-# Define fields with just name + description — no Pydantic model needed
+# Define fields with just name + description, no Pydantic model needed
 schemas = [
     ResponseSchema(name="summary", description="A 2-sentence summary"),
     ResponseSchema(name="difficulty", description="beginner, intermediate, or advanced"),
@@ -264,9 +264,9 @@ print(type(result))  # <class 'dict'>
 
 ---
 
-### 🎯 EnumOutputParser — Classification
+### 🎯 EnumOutputParser: Classification
 
-**The Problem:** You need the LLM to classify text into one of N categories — but it keeps returning extra text like "The sentiment is positive" instead of just "positive".
+**The Problem:** You need the LLM to classify text into one of N categories but it keeps returning extra text like "The sentiment is positive" instead of just "positive".
 
 **The Solution:** `EnumOutputParser` constrains the LLM to pick from a fixed set of enum values. Great for classification, routing, and any pick-one-from-N task.
 
@@ -274,7 +274,7 @@ print(type(result))  # <class 'dict'>
 from langchain.output_parsers import EnumOutputParser
 from enum import Enum
 
-# Define the allowed choices — LLM must pick one of these, nothing else
+# Define the allowed choices: LLM must pick one of these, nothing else
 class Sentiment(str, Enum):
     POSITIVE = "positive"
     NEGATIVE = "negative"
@@ -305,16 +305,16 @@ print(result.value)    # "positive"          (string value)
 
 ---
 
-### 🔧 OutputFixingParser — Self-Healing
+### 🔧 OutputFixingParser: Self-Healing
 
-**The Problem:** LLMs sometimes return malformed output — missing fields, wrong types, broken JSON. Your parser fails, and the entire chain crashes.
+**The Problem:** LLMs sometimes return malformed output, missing fields, wrong types, broken JSON. Your parser fails, and the entire chain crashes.
 
 **The Solution:** `OutputFixingParser` wraps any parser. If parsing fails, it sends the error message + raw output back to the LLM and asks it to fix the formatting. It's an automatic retry loop — the LLM corrects its own mistakes.
 
 ```python
 from langchain.output_parsers import OutputFixingParser
 
-# Wrap any parser — if it fails, the LLM auto-corrects the output
+# Wrap any parser if it fails, the LLM auto-corrects the output
 fixing_parser = OutputFixingParser.from_llm(
     parser=base_parser,  # the parser that might fail (e.g. PydanticOutputParser)
     llm=llm              # LLM used to read the error and fix the output
@@ -342,7 +342,7 @@ flowchart LR
 
 ---
 
-### ✨ with_structured_output — The Modern Way (v0.2+)
+### ✨ with_structured_output: The Modern Way (v0.2+)
 
 **The Problem:** The parser pattern works but has friction: create a parser, call `get_format_instructions()`, inject it into the prompt, pipe the parser at the end. Four steps for structured output.
 
@@ -358,11 +358,11 @@ class TechSummary(BaseModel):
     best_for: str = Field(description="Primary use case in one sentence")
     popularity: int = Field(description="Popularity score 1-10")
 
-# Bind the schema directly to the LLM — handles formatting + parsing internally
+# Bind the schema directly to the LLM: handles formatting + parsing internally
 # Uses function calling / tool use under the hood (more reliable than prompt injection)
 structured_llm = llm.with_structured_output(TechSummary)
 
-# invoke() now returns a TechSummary object directly — no format_instructions needed
+# invoke() now returns a TechSummary object directly, no format_instructions needed
 result = structured_llm.invoke("Tell me about FastAPI")
 
 print(type(result))        # <class 'TechSummary'>
@@ -388,7 +388,7 @@ print(f"Popularity: {result.popularity}")  # 9
 <td><b>StrOutputParser</b></td>
 <td><code>StrOutputParser()</code></td>
 <td><code>str</code></td>
-<td>Default — raw text</td>
+<td>Default: raw text</td>
 </tr>
 <tr>
 <td><b>JsonOutputParser</b></td>
