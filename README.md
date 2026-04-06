@@ -27,8 +27,8 @@ Built for engineers who want working references — not theory dumps.
 | 01 | [**LangChain Basics**](./01-langchain-basics/) | Prompts, LLM wrappers, chains, batch & streaming | ✅ |
 | 02 | [**LCEL Deep Dive**](./02-lcel_deep_dive/) | RunnableParallel, Lambda, Branch, Fallbacks | ✅ |
 | 03 | [**Output Parsers**](./03-langchain-output_parsers/) | JSON, Pydantic, Enum, auto-fixing parsers | ✅ |
-| 04 | **Document Loaders** | PDF, CSV, Web, YouTube, GitHub loaders | 🔜 |
-| 05 | **Text Splitters** | Recursive, Token, Semantic chunking | 🔜 |
+| 04 | [**Document Loaders**](./04-Document Loader-PDF_CSV_Web/) | PDF, CSV, Web, YouTube, GitHub loaders | ✅ |
+| 05 | [**Text Splitters**](./05-Text Splitters-Recursive_Token_Semantic Chunking/) | Recursive, Token, Semantic chunking | ✅ |
 | 06 | **RAG with FAISS** | Embeddings, vector store, retrieval chain | 🔜 |
 | 07 | **RAG with ChromaDB** | Persistent store, metadata filtering, MMR | 🔜 |
 | 08 | **Conversational Memory** | Buffer, Summary, Window, Entity memory | 🔜 |
