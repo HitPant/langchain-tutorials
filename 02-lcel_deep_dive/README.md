@@ -1,4 +1,4 @@
-# 02 · LCEL Deep Dive — LangChain Expression Language
+# 02 · LCEL Deep Dive: LangChain Expression Language
 
 > In Tutorial 01, we used the `|` pipe to build simple chains. But real apps need parallel execution, routing, fallbacks, and custom logic. LCEL gives you 5 building blocks to handle all of that.
 
@@ -6,11 +6,11 @@
 
 ## What You'll Learn
 
-- **RunnablePassthrough** — keep original input while adding computed fields
-- **RunnableParallel** — run multiple chains at the same time
-- **RunnableLambda** — inject any Python function into a chain
-- **RunnableBranch** — route inputs to different chains conditionally
-- **Fallbacks** — automatic backup when a model fails
+- **RunnablePassthrough**: keep original input while adding computed fields
+- **RunnableParallel**: run multiple chains at the same time
+- **RunnableLambda**: inject any Python function into a chain
+- **RunnableBranch**: route inputs to different chains conditionally
+- **Fallbacks**: automatic backup when a model fails
 
 ## Quick Start
 
@@ -26,7 +26,7 @@ jupyter notebook lcel_deep_dive.ipynb
 
 ## Core Concepts
 
-### ➡️ RunnablePassthrough — Keep Original Input While Adding New Data
+### ➡️ RunnablePassthrough: Keep Original Input While Adding New Data
 
 **The Problem:** You send `{"topic": "RAG"}` into a summarization chain. It returns a summary string — but now you've **lost** the original topic. All you have is the summary.
 
@@ -62,9 +62,9 @@ flowchart LR
 
 ---
 
-### ⚡ RunnableParallel — Run Multiple Chains at the Same Time
+### ⚡ RunnableParallel: Run Multiple Chains at the Same Time
 
-**The Problem:** You want to analyze a technology from 3 angles — pros, cons, and use cases. Running them sequentially is slow: each chain waits for the previous one to finish.
+**The Problem:** You want to analyze a technology from 3 angles: pros, cons, and use cases. Running them sequentially is slow: each chain waits for the previous one to finish.
 
 **The Solution:** `RunnableParallel` runs all chains **simultaneously** on the same input. It's like having 3 analysts working on the same question at the same time instead of passing it around one by one. If each chain takes 2 seconds: sequential = 6s, parallel ≈ 2s.
 
@@ -104,7 +104,7 @@ flowchart LR
 
 ---
 
-### 🔧 RunnableLambda — Inject Custom Python Logic Into a Chain
+### 🔧 RunnableLambda: Inject Custom Python Logic Into a Chain
 
 **The Problem:** Not every step in your pipeline is an LLM call. You need to clean inputs, validate data, transform outputs, or log results — but chains only accept Runnables, not plain functions.
 
@@ -114,11 +114,11 @@ flowchart LR
 from langchain_core.runnables import RunnableLambda
 
 def clean_input(data: dict) -> dict:
-    """Runs BEFORE the prompt — normalizes raw user input."""
+    """Runs BEFORE the prompt: normalizes raw user input."""
     return {"query": data["query"].strip().lower()}
 
 def format_output(text: str) -> dict:
-    """Runs AFTER the parser — adds metadata to the raw LLM output."""
+    """Runs AFTER the parser: adds metadata to the raw LLM output."""
     return {"answer": text, "char_count": len(text)}
 
 # Full pipeline: preprocess → prompt → LLM → parse → postprocess
@@ -150,7 +150,7 @@ flowchart LR
 
 ---
 
-### 🔀 RunnableBranch — Route to Different Chains Based on Input
+### 🔀 RunnableBranch: Route to Different Chains Based on Input
 
 **The Problem:** A coding question needs a different system prompt than a math question. Using one generic prompt for everything gives worse results across the board.
 
@@ -159,7 +159,7 @@ flowchart LR
 ```python
 from langchain_core.runnables import RunnableBranch
 
-# Conditions are checked TOP to BOTTOM — first match wins, last entry is the default
+# Conditions are checked TOP to BOTTOM: first match wins, last entry is the default
 router = RunnableBranch(
     # (condition_function, chain_to_run)
 
@@ -199,9 +199,9 @@ flowchart TD
 
 ---
 
-### 🛡️ Fallbacks — Automatic Backup When a Model Fails
+### 🛡️ Fallbacks: Automatic Backup When a Model Fails
 
-**The Problem:** In production, models go down — rate limits, timeouts, API outages. If your app uses one model, a single failure = total downtime for your users.
+**The Problem:** In production, models go down: rate limits, timeouts, API outages. If your app uses one model, a single failure = total downtime for your users.
 
 **The Solution:** `.with_fallbacks()` defines backup models. If the primary fails, LangChain **silently retries** with the next model. Your user never sees the failure — they just get an answer (maybe from a different model). It's like a backup generator that kicks in during a power outage.
 
@@ -210,7 +210,7 @@ primary = ChatOpenAI(model="gpt-4o-mini")
 backup = ChatAnthropic(model="claude-sonnet-4-20250514")
 
 # If GPT fails (timeout, rate limit, etc.) → Claude answers automatically
-# The switch is silent — user never sees the failure
+# The switch is silent: user never sees the failure
 resilient_llm = primary.with_fallbacks([backup])
 
 # You can stack multiple fallbacks: primary → backup1 → backup2 → backup3
@@ -244,7 +244,7 @@ flowchart LR
 <tr>
 <td><b>Passthrough</b></td>
 <td><code>RunnablePassthrough()</code></td>
-<td>Conveyor belt — package stays on it</td>
+<td>Conveyor belt: package stays on it</td>
 <td>Carry original input forward</td>
 </tr>
 <tr>

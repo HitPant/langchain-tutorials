@@ -1,4 +1,4 @@
-# 01 · LangChain Basics — Prompts, LLMs & Chains
+# 01 · LangChain Basics: Prompts, LLMs & Chains
 
 > The three foundational building blocks of every LangChain application.
 
@@ -38,11 +38,11 @@ LangChain lets you swap providers with zero downstream changes:
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
 
-# Initialize two different providers — same interface, different models
+# Initialize two different providers, same interface, different models
 gpt    = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 claude = ChatAnthropic(model="claude-sonnet-4-20250514", temperature=0)
 
-# Both use .invoke() — swap providers without changing downstream code
+# Both use .invoke(): swap providers without changing downstream code
 gpt.invoke("What is LangChain?")
 claude.invoke("What is LangChain?")
 ```
@@ -60,15 +60,15 @@ from langchain_core.prompts import ChatPromptTemplate
 
 # Define a reusable template with variable placeholders {role} and {question}
 prompt = ChatPromptTemplate.from_messages([
-    ("system", "You are a {role}. Be concise — 2 sentences max."),
+    ("system", "You are a {role}. Be concise, 2 sentences max."),
     ("human", "{question}")
 ])
 
-# Reuse the same template with different inputs — no prompt rewriting needed
+# Reuse the same template with different inputs, no prompt rewriting needed
 prompt.invoke({"role": "ML engineer", "question": "What is RLHF?"})
 ```
 
-**Few-shot prompting** — steer output format with examples:
+**Few-shot prompting**: steer output format with examples:
 
 ```python
 from langchain_core.prompts import FewShotChatMessagePromptTemplate
@@ -87,7 +87,7 @@ few_shot = FewShotChatMessagePromptTemplate(
 
 ---
 
-### ⛓️ Chains — The Pipe Operator
+### ⛓️ Chains: The Pipe Operator
 
 The `|` operator is LangChain's core abstraction. Connect `prompt → model → parser`:
 
@@ -122,7 +122,7 @@ flowchart LR
 
 ---
 
-### 🔗 Sequential Chains — Multi-Step Pipelines
+### 🔗 Sequential Chains: Multi-Step Pipelines
 
 Chain LLM calls together. Output of step 1 feeds into step 2:
 
@@ -157,13 +157,13 @@ flowchart LR
 ### ⚡ Batch & Streaming
 
 ```python
-# Batch — process multiple inputs in parallel (one API call per input, run concurrently)
+# Batch: process multiple inputs in parallel (one API call per input, run concurrently)
 results = chain.batch([
     {"role": "ML engineer", "question": "What is attention?"},
     {"role": "ML engineer", "question": "What is RLHF?"},
 ])
 
-# Stream — token-by-token output for real-time UX (chatbot-style)
+# Stream: token-by-token output for real-time UX (chatbot-style)
 for chunk in chain.stream({"role": "poet", "question": "Describe transformers"}):
     print(chunk, end="", flush=True)  # prints each token as it arrives
 ```
@@ -227,7 +227,7 @@ for chunk in chain.stream({"role": "poet", "question": "Describe transformers"})
 
 ## Next Up
 
-➡️ **[02 · LCEL Deep Dive](../02-lcel-deep-dive/)** — RunnableParallel, RunnableLambda, fallbacks, routing
+➡️ **[02 · LCEL Deep Dive](../02-lcel-deep-dive/)**: RunnableParallel, RunnableLambda, fallbacks, routing
 
 ---
 
