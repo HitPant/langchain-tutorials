@@ -349,11 +349,6 @@ flowchart TD
 ├── README.md                ← you are here
 └── document_loaders.ipynb   ← runnable notebook with all sections
 ```
-
-## Navigation
-
-⬅️ **[03 · Output Parsers](../03-output-parsers/)** · ➡️ **[05 · Text Splitters](../05-text-splitters/)**
-
 ---
 
 <p align="center">
