@@ -29,8 +29,8 @@ Built for engineers who want working references — not theory dumps.
 | 03 | [**Output Parsers**](./03-langchain-output_parsers/) | JSON, Pydantic, Enum, auto-fixing parsers | ✅ |
 | 04 | [**Document Loaders**](./04-Document%20Loader-PDF_CSV_Web/) | PDF, CSV, Web, YouTube, GitHub loaders | ✅ |
 | 05 | [**Text Splitters**](./05-Text%20Splitters-Recursive_Token_Semantic%20Chunking/) | Recursive, Token, Semantic chunking | ✅ |
-| 06 | **RAG with FAISS** | Embeddings, vector store, retrieval chain | 🔜 |
-| 07 | **RAG with ChromaDB** | Persistent store, metadata filtering, MMR | 🔜 |
+| 06 | [**RAG with FAISS**](./06-Rag_FAISS/) | Embeddings, vector store, retrieval chain | ✅ |
+| 07 | [**RAG with ChromaDB**](./07-RAG_ChromaDB) | Persistent store, metadata filtering, MMR | ✅ |
 | 08 | **Conversational Memory** | Buffer, Summary, Window, Entity memory | 🔜 |
 | 09 | **Agents & Custom Tools** | ReAct agent, custom tools, tool routing | 🔜 |
 | 10 | **Callbacks & Tracing** | Custom handlers, LangSmith, cost tracking | 🔜 |
