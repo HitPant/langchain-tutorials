@@ -194,9 +194,7 @@ flowchart LR
 └── callbacks_tracing.ipynb   ← runnable notebook with all sections
 ```
 
-## Navigation
-
-⬅️ **[09 · Agents & Tools](../09-agents-tools/)** · **Series Complete!** 🎉
+**Series Complete!** 🎉
 
 ---
 
