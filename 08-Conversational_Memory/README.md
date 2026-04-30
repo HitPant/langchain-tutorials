@@ -244,10 +244,6 @@ memory = ConversationEntityMemory(
 └── conversational_memory.ipynb  ← runnable notebook with all memory types
 ```
 
-## Navigation
-
-⬅️ **[07 · RAG + Chroma](../07-rag-chroma/)** · ➡️ **[09 · Agents & Tools](../09-agents-tools/)**
-
 ---
 
 <p align="center">
