@@ -219,11 +219,6 @@ def search_docs(query: str, max_results: int = 5) -> str:
 ├── README.md              ← you are here
 └── agents_tools.ipynb     ← runnable notebook with all sections
 ```
-
-## Navigation
-
-⬅️ **[08 · Memory](../08-conversational-memory/)** · ➡️ **[10 · Callbacks & Tracing](../10-callbacks-tracing/)**
-
 ---
 
 <p align="center">
