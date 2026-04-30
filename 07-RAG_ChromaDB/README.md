@@ -258,11 +258,6 @@ retriever = vectorstore.as_retriever(
 ├── README.md           ← you are here
 └── rag_chroma.ipynb    ← runnable notebook with full pipeline
 ```
-
-## Navigation
-
-⬅️ **[06 · RAG + FAISS](../06-rag-faiss/)** · ➡️ **[08 · Memory](../08-memory/)**
-
 ---
 
 <p align="center">

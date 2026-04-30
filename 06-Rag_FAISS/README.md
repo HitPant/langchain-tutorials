@@ -312,11 +312,6 @@ loaded_store = FAISS.load_local(
 ├── README.md           ← you are here
 └── rag_faiss.ipynb     ← runnable notebook with full pipeline
 ```
-
-## Navigation
-
-⬅️ **[05 · Text Splitters](../05-text-splitters/)** · ➡️ **[07 · RAG + Chroma](../07-rag-chroma/)**
-
 ---
 
 <p align="center">

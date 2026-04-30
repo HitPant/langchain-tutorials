@@ -291,11 +291,6 @@ flowchart TD
 ├── README.md               ← you are here
 └── text_splitters.ipynb    ← runnable notebook with all sections
 ```
-
-## Navigation
-
-⬅️ **[04 · Document Loaders](../04-document-loaders/)** · ➡️ **[06 · RAG + FAISS](../06-rag-faiss/)**
-
 ---
 
 <p align="center">
